@@ -193,3 +193,46 @@ function promiseAny(promises) {
         });
     });
 }
+/*
+Необходимо написать функцию поиска составного авиабилета.
+Функция принимает на вход пункт вылета, пункт назначения и функцию поиска билетов и должна вернуть промис,
+который разогнается массивом всех пунктов перелета или редкостится ошибкой 'No way'.
+Функция поиска билетов возвращает список городов, до которых можно долететь из заданного.
+*/
+
+const example = {'A': ['B', 'D'], 'B': ['C', 'N', 'Z'], 'D': ['E', 'F'], 'F': ['S']}
+
+async function fetchFlights(from) {
+  return example[from];
+}
+
+console.log(findPath('A', 'N', fetchFlights)) // Promise.resolve(['A', 'B', 'N'])
+console.log(findPath('A', 'S', fetchFlights)) // Promise.resolve(['A', 'D', 'F', 'S'])
+console.log(findPath('B', 'S', fetchFlights)) // Promise.reject(new Error('No way'))
+
+async function findPath(from, to, fetchFlights) {
+    const queue = [{node: from, path: [from]}]
+    const visited = {}
+    while (queue.length > 0) {
+        const {node, path} = queue.shift()
+        if (visited[node]) continue
+        visited[node] = true
+        if (node === to) return path
+        try {
+            const neighbors = await fetchFlights(node)
+            if (neighbors) {
+                for (const neighbor of neighbors) {
+                queue.push({node:neighbor, path: [...path,neighbor]})
+            }
+        }
+        } catch {
+            continue
+        }
+
+
+    }
+    throw new Error('No way')
+
+
+}
+
