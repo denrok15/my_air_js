@@ -49,7 +49,6 @@ function fetchWithRetryAndTimeout(url, count = 3) {
 function isIsogram(s) {
   const letters = new Set()
   for (const char of s.toLowerCase()) {
-
     if (letters.has(char)) return false
     letters.add(char)
 
