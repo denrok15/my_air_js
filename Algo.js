@@ -175,3 +175,21 @@ console.log(nextSequence()); // "0 b ?"
 // ...
 console.log(nextSequence()); // "2 b ."
 console.log(nextSequence()); // undefined
+function promiseAny(promises) {
+    return new Promise((resolve, reject) => {
+        let rejectedCount = 0;
+        const errors = [];
+
+        promises.forEach((promise) => {
+            Promise.resolve(promise)
+                .then(resolve) // Если промис успешен — сразу резолвим результат
+                .catch((error) => {
+                    errors.push(error);
+                    rejectedCount++;
+                    if (rejectedCount === promises.length) {
+                        reject(new AggregateError(errors, "All promises were rejected"));
+                    }
+                });
+        });
+    });
+}
