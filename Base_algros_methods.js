@@ -29,9 +29,6 @@ function multiplyAll(...numbers) {
   return numbers.reduce((acc, value) => acc * value, 1)
 }
 
-
-
-
 function filterEven(arr) {
   return arr.filter((element) => element % 2 === 0)
 }

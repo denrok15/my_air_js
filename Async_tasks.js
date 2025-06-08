@@ -10,22 +10,6 @@
 // Timeout 1
 // undefined
 
-// task 2
-
-Array.prototype.flatMapGroupBy = function (fn) {
-  const collection = {}
-  for (const item of this) {
-    const key = fn(item)
-    if (key in collection) {
-      collection[key].push(item)
-    } else {
-      collection[key] = [item]
-    }
-  }
-  return collection
-
-}
-
 // task 3
 function fetchWithRetryAndTimeout(url, count = 3) {
   const responce = fetch(url)

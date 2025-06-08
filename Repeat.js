@@ -77,15 +77,3 @@ const memoizedFn = memoize(function (a, b) {
   return a + b
 })
 
-function memoize(fn) {
-  const memo = new Map()
-  return function (...args) {
-    const hash = args.join('_')
-    if (memo.has(hash)) return memo.get(hash)
-    const value = fn(...args)
-    memo.set(hash,value)
-    return value
-
-
-  }
-}

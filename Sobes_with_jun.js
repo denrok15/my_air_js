@@ -1,16 +1,3 @@
-Array.prototype.groupby = function (fn) {
-  const result = {}
-  this.forEach((value) => {
-    const key = fn(value)
-    if (result[key]) result[key].push(value)
-    else result[key] = [value]
-
-  })
-
-
-  return result
-
-}
 
 function get(url, count = 5) {
   return fetch(url)
@@ -85,4 +72,14 @@ function check(fn1, fn2) {
       }
     })
 
+}
+function fecthwithTimeout(url, ms) {
+  const responce = fetch(url)
+  const timeout = new Promise((_, reject) => {
+    setTimeout(() => {
+        reject(new Error('Timeout'), ms)
+      },
+    )
+  })
+  return Promise.race([responce, timeout])
 }
