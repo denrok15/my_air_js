@@ -28,16 +28,6 @@ function joins2(delimiter) {
   return new Array(arguments).slice(1).join(delimiter)
 }
 
-Array.prototype.groupby = function(fn) {
-  const result = {}
-  for (const value of this) {
-    const key = fn(value)
-    if(result[key]) result[key].push(value)
-    else result[key] = [value]
-  }
-  return result
-
-}
 function get(url,count = 5) {
   return fetch(url)
     .then(res => res.json())

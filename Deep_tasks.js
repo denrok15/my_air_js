@@ -11,6 +11,7 @@ function deepclone(obj) {
   const result = {}
   for (const key in obj) {
     if (obj.hasOwnProperty(key)) result[key] = deepclone(obj[key])
+
   }
 
   return result

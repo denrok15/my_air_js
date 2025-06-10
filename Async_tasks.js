@@ -30,15 +30,7 @@ function fetchWithRetryAndTimeout(url, count = 3) {
 
 //task 4
 
-function isIsogram(s) {
-  const letters = new Set()
-  for (const char of s.toLowerCase()) {
-    if (letters.has(char)) return false
-    letters.add(char)
 
-  }
-  return true
-}
 
 // task 5
 async function validateall(url1, url2, value) {

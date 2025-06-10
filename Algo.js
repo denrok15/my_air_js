@@ -1,25 +1,24 @@
 /*
 Дан массив целых неотрицательных чисел, нужно сгруппировать друг с другом числа,
 которые можно получить путём перестановки цифр их составляющих,
-нули при этом игнорируем, т. к. нет числа 011.
+нули при этом игнорируем, т.к нет числа 011.
 Решение должно быть максимально эффективно по памяти и времени.
 */
 
 function digitPermutation(arr) {
-    const result = {}
-    arr.forEach((digit) => {
-        const key = String(digit)
-            .split('')
-            .filter(el => el !== '0')
-            .sort()
-        if (result[key]) {
-            result[key].push(digit)
-        }
-        else {
-            result[key] = [digit]
-            }
-    })
-    return Object.values(result)
+  const result = {}
+  arr.forEach((digit) => {
+    const key = String(digit)
+      .split('')
+      .filter(el => el !== '0')
+      .sort()
+    if (result[key]) {
+      result[key].push(digit)
+    } else {
+      result[key] = [digit]
+    }
+  })
+  return Object.values(result)
 
 }
 
@@ -37,26 +36,25 @@ console.log("end test");
 // Результат:
 
 function render(msg) {
-    console.log(msg)
+  console.log(msg)
 }
 
 function createmessage() {
-    let expectid = 1
-    const buffer = new Map()
-    return function(msg) {
-        buffer.set(msg.id,msg.text)
-        while (buffer.has(expectid)) {
-            render(buffer.get(expectid))
-            buffer.delete(exectid)
-            expectid += 1
-        }
+  let expectid = 1
+  const buffer = new Map()
+  return function (msg) {
+    buffer.set(msg.id, msg.text)
+    while (buffer.has(expectid)) {
+      render(buffer.get(expectid))
+      buffer.delete(exectid)
+      expectid += 1
     }
+  }
 
-    }
-
-
+}
 
 printFileTree(data);
+
 function allSequences(words) {
   const position = new Array(words.length).fill(0);
   let finished = false;
@@ -96,22 +94,21 @@ console.log(nextSequence()); // "0 b ?"
 console.log(nextSequence()); // "2 b ."
 console.log(nextSequence()); // undefined
 function promiseAny(promises) {
-    return new Promise((resolve, reject) => {
-        let rejectedCount = 0;
-        const errors = [];
+  return new Promise((resolve, reject) => {
+    let rejectedCount = 0;
+    const errors = [];
 
-        promises.forEach((promise) => {
-            Promise.resolve(promise)
-                .then(resolve) // Если промис успешен — сразу резолвим результат
-                .catch((error) => {
-                    errors.push(error);
-                    rejectedCount++;
-                    if (rejectedCount === promises.length) {
-                        reject(new AggregateError(errors, "All promises were rejected"));
-                    }
-                });
+    promises.forEach((promise) => {
+      Promise.resolve(promise)
+        .then(resolve)
+        .catch((error) => {
+          errors.push(error);
+          rejectedCount++;
+          if (rejectedCount === promises.length) {
+            reject(new AggregateError(errors, "All promises were rejected"));
+          }
         });
     });
+  });
 }
-
 
