@@ -80,18 +80,19 @@ function twosum(arr, target) {
 
 function createfibmemo() {
   const cache = new Map()
-  cache.set(0,0)
-  cache.set(1,1)
+  cache.set(0, 0)
+  cache.set(1, 1)
   return function fibmemo(n) {
     if (cache.has(n)) {
       return cache.get(n)
     }
     const result = fibmemo(n - 1) + fibmemo(n - 2)
-    cache.set(n,result)
+    cache.set(n, result)
     return result
 
   }
 }
+
 function slidingwindow(str) {
   let left = 0
   let maxlength = 0
@@ -111,11 +112,39 @@ function maxpodmarra(nums) {
   let maxCurrent = nums[0]
   let maxGlobal = nums[0]
   for (let i = 1; i < nums.length; i++) {
-    maxCurrent = Math.max(maxCurrent + nums[i],maxGlobal)
+    maxCurrent = Math.max(maxCurrent + nums[i], maxGlobal)
     if (maxCurrent > maxGlobal) {
       maxGlobal = maxCurrent
     }
   }
   return maxGlobal
 }
+
+function isskobki(str) {
+  const stack = []
+  const pairs = {
+    ')': '(',
+    ']': '[',
+    '}': '{'
+  }
+  for (let char of str) {
+    if (['(','[','{'].includes(char)) {
+      stack.push(char)
+      console.log('if',char,stack)
+    } else if ([')',']','}'].includes(char)) {
+      const popi = stack.pop()
+      console.log('else',popi,stack)
+      if (popi !== pairs[char]) {
+        return false
+      }
+    }
+  }
+  return (stack.length === 0)
+}
+
+
+console.log(isskobki('([[]])'))
+
+
+
 

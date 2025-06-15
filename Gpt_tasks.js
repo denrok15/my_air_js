@@ -21,8 +21,6 @@ function flatMap(arr, fn) {
 }
 
 
-
-
 const data = {
   name: "folder",
   children: [
@@ -36,9 +34,6 @@ const data = {
     }
   ]
 };
-
-
-
 
 console.log(getPaths(data));
 
