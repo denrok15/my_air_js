@@ -146,5 +146,52 @@ function isskobki(str) {
 console.log(isskobki('([[]])'))
 
 
+const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
+  'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
 
 
+function ispangram(text) {
+  const chars = new Set()
+  for (const char of text.toUpperCase()) {
+    if (letters.includes(char)) {
+      chars.add(char)
+
+    }
+  }
+  return chars.size === 26
+}
+
+function groupByDigitProduct(arr) {
+  const result = {}
+  arr.forEach((digit) => {
+    const key = String(digit)
+      .split('')
+      .reduce((acc, el) => {
+        if (el !== '0') {
+          return acc * el
+        } else {
+          return acc
+        }
+      })
+    if (result[key]) {
+      result[key].push(digit)
+    } else {
+      result[key] = [digit]
+    }
+
+  }, 1)
+  return Object.values(result)
+
+}
+function perevod(s) {
+  let snew = ''
+  for (const char of s ) {
+    if (char === char.toUpperCase()) {
+      snew += '_'
+      snew += char.toLowerCase()
+    } else {
+      snew += char
+    }
+  }
+  return snew
+}

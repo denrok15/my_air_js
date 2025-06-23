@@ -37,28 +37,7 @@ const data = {
 
 console.log(getPaths(data));
 
-function groupByDigitProduct(arr) {
-  const result = {}
-  arr.forEach((digit) => {
-    const key = String(digit)
-      .split('')
-      .reduce((acc, el) => {
-        if (el !== '0') {
-          return acc * el
-        } else {
-          return acc
-        }
-      })
-    if (result[key]) {
-      result[key].push(digit)
-    } else {
-      result[key] = [digit]
-    }
 
-  }, 1)
-  return Object.values(result)
-
-}
 
 function testGroupByDigitProduct() {
   const result1 = groupByDigitProduct([123, 231, 12, 21, 13, 31, 102]);

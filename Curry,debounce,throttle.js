@@ -115,28 +115,6 @@ function createsmartfetch(timeout) {
 
   }
 }
-function createsmartfetch2(timeout) {
-  let queue = new Map()
-  let timer = null
-  return function smartfetch2(id) {
-    return new Promise((resolve) => {
-      queue.set(id,resolve)
-      if (!timer) {
-        timer = setTimeout(async () => {
-          const ids =  Array.from(queue.keys())
-          const resolves = new Map(queue)
-          queue.clear()
-          timer = null
-
-          const result = await batchFetch(id)
-          for (const id of ids) {
-            queue.get(id)(result[id])
-          }
-        },timeout)
-      }
-    })
-  }
-}
 
 function batchFetch(ids) {
   return new Promise((resolve) => {

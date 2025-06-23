@@ -132,3 +132,102 @@ function promiseAllSettled(promises) {
 
   })
 }
+const timeLimited = function (fn, t) {
+  return (...args) => new Promise((resolve, reject) => {
+    const timer = setTimeout(() => {
+      reject('TimeLimited')
+    }, t)
+    fn(...args)
+      .then(result => {
+        clearTimeout(timer)
+        resolve(result)
+      })
+  })
+
+}
+
+const timelimited2 = function (fn, t) {
+  return (...args) => {
+    let timeoutid
+    const timer = new Promise((_, reject) => {
+      timeoutid = setTimeout(() => {
+        reject('TimeLimited')
+      }, t)
+
+    })
+    const promise1 = fn(...args).finally(() => clearTimeout(timeoutid))
+    return Promise.race([timer, promise1])
+  }
+
+
+}
+function get(url, count = 5) {
+  return fetch(url)
+    .then(res => res.json())
+    .catch(() => {
+      if (count > 0) {
+        return get(url, count - 1)
+      } else {
+        throw new Error('Count limit')
+      }
+
+    })
+
+}
+import {checkresult} from 'mylib'
+
+const solution = 'Any answer'
+const url1 = 'yandex.ru'
+const url2 = 'google.com'
+const f1 = checkresult(url1, solution)
+const f2 = checkresult(url2, solution)
+
+function check(fn1, fn2) {
+  const timer = new Promise((_, reject) => {
+    setTimeout(() => {
+      reject('timeout')
+    },1000)
+  })
+  const promise1 = Promise.race([fn1,timer])
+  const promise2 = Promise.race([fn2,timer])
+  return Promise.all([promise1,promise2])
+    .then(([value1,value2])=> {
+      if (value1 && value2) {
+        return 'success'
+      } else {
+        return 'fail'
+      }
+    })
+    .catch((error) => {
+      if (error !== 'timeout') {
+        return 'error'
+      } else {
+        return 'timeout'
+      }
+    })
+
+}
+function fecthwithTimeout(url, ms) {
+  const responce = fetch(url)
+  const timeout = new Promise((_, reject) => {
+    setTimeout(() => {
+        reject(new Error('Timeout'), ms)
+      },
+    )
+  })
+  return Promise.race([responce, timeout])
+}
+const timeLimited = function (fn, t) {
+  return (...args) => new Promise((resolve, reject) => {
+    const timer = setTimeout(() => {
+      reject('TimeLimited')
+    }, t)
+    fn(...args)
+      .then(result => {
+        clearTimeout(timer)
+        resolve(result)
+      })
+  })
+
+}
+

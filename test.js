@@ -2,18 +2,7 @@ const a = Number('6gf')
 if (isNaN(a)) {
   console.log(a)
 }
-function perevod(s) {
-  let snew = ''
-  for (const char of s ) {
-    if (char === char.toUpperCase()) {
-      snew += '_'
-      snew += char.toLowerCase()
-    } else {
-      snew += char
-    }
-  }
-  return snew
-}
+
 function sleep(duration) {
   return new Promise((resolve) => {
     setTimeout(()=> {
@@ -36,17 +25,7 @@ function get(url,count = 5) {
       else throw new Error('Expected')
     })
 }
-function curry(fn) {
-  return function curried(...args) {
-    if (args.length >= fn.length) return fn.apply(this,args)
-    else{
-      return function(...args2) {
-        return curried.apply(this, args.concat(args2))
 
-      }
-    }
-  }
-}
 function memoize(fn) {
   const memo = new Map()
   return function(...args) {
@@ -57,16 +36,4 @@ function memoize(fn) {
     return value
   }
 }
-const timeLimited = function (fn, t) {
-  return (...args) => new Promise((resolve, reject) => {
-    const timer = setTimeout(() => {
-      reject('TimeLimited')
-    }, t)
-    fn(...args)
-      .then(result => {
-        clearTimeout(timer)
-        resolve(result)
-      })
-  })
 
-}
