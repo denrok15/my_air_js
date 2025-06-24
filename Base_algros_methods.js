@@ -1,11 +1,20 @@
+// ===== 1. Удвоение элементов массива =====
+// Условие: Создать новый массив с удвоенными значениями элементов
+// Подход: Использование метода map для преобразования каждого элемента
+// Сложность: O(n)
 function double(arr) {
-  return arr.map((element) =>
-    element * 2
-  )
+  return arr.map((element) => element * 2)
 }
+
+// ===== 2. Слияние двух отсортированных массивов =====
+// Условие: Объединить два отсортированных массива в один отсортированный
+// Подход: Использование двух указателей для пошагового сравнения элементов
+// Сложность: O(n + m), где n и m - длины массивов
 function mergeArrays(arr1, arr2) {
   const result = []
   let i = 0, j = 0
+  
+  // Основное сравнение элементов
   while (i < arr1.length && j < arr2.length) {
     if (arr1[i] < arr2[j]) {
       result.push(arr1[i])
@@ -15,49 +24,94 @@ function mergeArrays(arr1, arr2) {
       j += 1
     }
   }
+  
+  // Добавление оставшихся элементов из первого массива
   while (i < arr1.length) {
     result.push(arr1[i])
     i += 1
   }
+  
+  // Добавление оставшихся элементов из второго массива
   while (j < arr2.length) {
     result.push(arr2[j])
     j += 1
   }
+  
   return result
 }
+
+// ===== 3. Произведение всех чисел =====
+// Условие: Найти произведение всех переданных чисел
+// Подход: Использование reduce для последовательного умножения
+// Сложность: O(n)
 function multiplyAll(...numbers) {
   return numbers.reduce((acc, value) => acc * value, 1)
 }
 
+// ===== 4. Фильтрация четных чисел =====
+// Условие: Отфильтровать массив, оставив только четные числа
+// Подход: Использование метода filter с проверкой на четность
+// Сложность: O(n)
 function filterEven(arr) {
   return arr.filter((element) => element % 2 === 0)
 }
 
+// ===== 5. Сумма элементов массива =====
+// Условие: Вычислить сумму всех элементов массива
+// Подход: Использование reduce для последовательного сложения
+// Сложность: O(n)
 function sum(arr) {
-  return arr.reduce((acc, element) => acc + element)
+  return arr.reduce((acc, element) => acc + element, 0)
 }
 
+// ===== 6. Реверс массива =====
+// Условие: Создать новый массив с обратным порядком элементов
+// Подход: Использование slice().reverse() для создания копии и реверса
+// Сложность: O(n)
 function reverse(arr) {
   return arr.slice().reverse()
 }
 
+// ===== 7. Получение всех ключей объекта (включая вложенные) =====
+// Условие: Собрать все ключи объекта, включая ключи вложенных объектов
+// Подход: Рекурсивный обход объекта с сохранением ключей
+// Сложность: O(n), где n - общее количество ключей
 function getKeys(obj) {
   const result = []
   for (const key in obj) {
-    if (typeof obj[key] === 'object') result.push(...getKeys(obj[key]))
-    else result.push(key)
+    if (typeof obj[key] === 'object' && obj[key] !== null) {
+      result.push(...getKeys(obj[key])) // Рекурсивный вызов для вложенных объектов
+    } else {
+      result.push(key)
+    }
   }
   return result
 }
 
+// ===== 8. Получение всех значений объекта (включая вложенные) =====
+// Условие: Собрать все значения объекта, включая значения вложенных объектов
+// Подход: Рекурсивный обход объекта с сохранением значений
+// Сложность: O(n), где n - общее количество значений
 function getValues(obj) {
   const result = []
   for (const key in obj) {
-    if (typeof obj[key] === 'object') result.push(...getValues(obj[key]))
-    else result.push(obj[key])
+    if (typeof obj[key] === 'object' && obj[key] !== null) {
+      result.push(...getValues(obj[key])) // Рекурсивный вызов для вложенных объектов
+    } else {
+      result.push(obj[key])
+    }
   }
   return result
 }
-function invert(arr) {
 
+// ===== 9. Инверсия массива (дополнительная реализация) =====
+// Условие: Создать новый массив с обратным порядком элементов
+// Подход: Ручная реализация без использования reverse()
+// Сложность: O(n)
+function invert(arr) {
+  const result = []
+  for (let i = arr.length - 1; i >= 0; i--) {
+    result.push(arr[i])
+  }
+  return result
 }
